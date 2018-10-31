@@ -1,17 +1,10 @@
-module Anagram (anagramsFor) where
+module Anagram ( anagramsFor ) where
 
 import           Data.Char (toLower)
-import           Data.List (deleteFirstsBy)
-import           GHC.Char  (eqChar)
+import           Data.List (sort)
 
 anagramsFor :: String -> [String] -> [String]
-anagramsFor xs = filter $ isAnagram xs
-
-isAnagram :: String -> String -> Bool
-isAnagram xs ys
-  | length xs /= length ys = False
-  | lowercase xs == lowercase ys = False
-  | otherwise = null $ deleteFirstsBy eqChar (lowercase xs) (lowercase ys)
-
-lowercase :: String -> String
-lowercase = map toLower
+anagramsFor word = filter isAnagram
+  where
+    word' = sort $ map toLower word
+    isAnagram = (== word') . sort . map toLower
