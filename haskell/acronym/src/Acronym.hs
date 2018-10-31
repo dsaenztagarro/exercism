@@ -1,7 +1,6 @@
 module Acronym (abbreviate) where
 
 import           Data.Char (isUpper, toUpper)
-import           Data.List (elemIndex)
 
 abbreviate :: String -> String
 abbreviate xs = concatMap letters $ words xs
