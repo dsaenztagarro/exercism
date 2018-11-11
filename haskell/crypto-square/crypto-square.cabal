@@ -1,0 +1,34 @@
+-- This file has been generated from package.yaml by hpack version 0.28.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: f7d954cfeb1d2942709f3dd745f0d34ce2256f18356246064e7a7b706675b152
+
+name:           crypto-square
+version:        3.2.0.5
+build-type:     Simple
+cabal-version:  >= 1.10
+
+library
+  exposed-modules:
+      CryptoSquare
+  other-modules:
+      Paths_crypto_square
+  hs-source-dirs:
+      src
+  build-depends:
+      base
+  default-language: Haskell2010
+
+test-suite test
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      Paths_crypto_square
+  hs-source-dirs:
+      test
+  build-depends:
+      base
+    , crypto-square
+    , hspec
+  default-language: Haskell2010
