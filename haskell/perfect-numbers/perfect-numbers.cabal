@@ -1,0 +1,34 @@
+-- This file has been generated from package.yaml by hpack version 0.28.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 9b3d55e3b5c21435908be5fe4559088dfbbcd729ec5df3dd2f4a727baff0553c
+
+name:           perfect-numbers
+version:        1.1.0.3
+build-type:     Simple
+cabal-version:  >= 1.10
+
+library
+  exposed-modules:
+      PerfectNumbers
+  other-modules:
+      Paths_perfect_numbers
+  hs-source-dirs:
+      src
+  build-depends:
+      base
+  default-language: Haskell2010
+
+test-suite test
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      Paths_perfect_numbers
+  hs-source-dirs:
+      test
+  build-depends:
+      base
+    , hspec
+    , perfect-numbers
+  default-language: Haskell2010
