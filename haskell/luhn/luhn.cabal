@@ -1,0 +1,34 @@
+-- This file has been generated from package.yaml by hpack version 0.28.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 5e8b52c05dba95c3c2847c827aba06016c37fd84141a38cde7aad54cd2cb28e6
+
+name:           luhn
+version:        1.3.0.5
+build-type:     Simple
+cabal-version:  >= 1.10
+
+library
+  exposed-modules:
+      Luhn
+  other-modules:
+      Paths_luhn
+  hs-source-dirs:
+      src
+  build-depends:
+      base
+  default-language: Haskell2010
+
+test-suite test
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      Paths_luhn
+  hs-source-dirs:
+      test
+  build-depends:
+      base
+    , hspec
+    , luhn
+  default-language: Haskell2010
