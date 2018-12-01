@@ -1,16 +1,8 @@
-import Test.Hspec        (Spec, it, shouldBe)
-import Test.Hspec.Runner (configFastFail, defaultConfig, hspecWith)
+import           Test.Hspec        (Spec, it, shouldBe)
+import           Test.Hspec.Runner (configFastFail, defaultConfig, hspecWith)
 
-import BST
-  ( bstLeft
-  , bstRight
-  , bstValue
-  , empty
-  , fromList
-  , insert
-  , singleton
-  , toList
-  )
+import           BST               (bstLeft, bstRight, bstValue, empty,
+                                    fromList, insert, singleton, toList)
 
 main :: IO ()
 main = hspecWith defaultConfig {configFastFail = True} specs
