@@ -1,0 +1,38 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 65b3ad8b9219e729a3d5f5283d48ebc7579f0c111a728c15801013a13e9da03a
+
+name:           wordy
+version:        1.5.0.8
+build-type:     Simple
+
+library
+  exposed-modules:
+      WordProblem
+  other-modules:
+      Paths_wordy
+  hs-source-dirs:
+      src
+  ghc-options: -Wall
+  build-depends:
+      attoparsec
+    , base
+    , text
+  default-language: Haskell2010
+
+test-suite test
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      Paths_wordy
+  hs-source-dirs:
+      test
+  build-depends:
+      base
+    , hspec
+    , wordy
+  default-language: Haskell2010
