@@ -1,7 +1,9 @@
 module CollatzConjecture (collatz) where
 
+import           Data.List (genericLength)
+
 collatz :: Integer -> Maybe Integer
-collatz x | x > 0 = Just $ toInteger $ length (takeWhile (/= 1) $ iterate next x)
+collatz x | x > 0 = Just $ genericLength (takeWhile (/= 1) $ iterate next x)
           | otherwise = Nothing
 
 next :: Integer -> Integer
