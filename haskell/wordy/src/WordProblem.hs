@@ -1,45 +1,54 @@
 {-# LANGUAGE OverloadedStrings #-}
--- https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/attoparsec
--- https://mmhaskell.com/blog/2017/2/6/applicatives-one-step-further
--- https://hackernoon.com/attoparsec-the-clarity-of-do-syntax-95bf47846855
--- https://mmhaskell.com/parsing-3
--- https://mmhaskell.com/parsing-2
+{-# OPTIONS_GHC -fno-warn-unused-do-bind #-}
+
 module WordProblem (answer) where
 
 import           Control.Applicative
 import           Data.Attoparsec.Text
-import           Data.Char            (digitToInt)
-import           Data.Text            (pack)
-import           Debug.Trace
+import           Data.Either.Combinators
+import           Data.String             (fromString)
 
-newtype Problem = Problem { d1 :: Integer } deriving Show
+data Operator = Addition | Substraction | Multiplication | Division deriving Show
 
-numberParser :: Parser Problem
-numberParser = do
-  string "What is "
-  d1 <- count 1 digit
-  return (Problem (read d1 :: Integer))
+type Operand = Integer
 
-sumParser :: Parser Problem
-sumParser = do
-  string "What is "
-  d <- count 1 digit
-  string " plus "
-  dd <- count 1 digit
-  return (Problem ((read d :: Integer) + (read dd :: Integer)))
-
-expressionParser :: Parser Problem
-expressionParser = sumParser <|> numberParser
-
--- problemParser :: Parser Problem
--- problemParser = do
---   string "What is "
---   d1 <- count 1 digit
---   return (Problem (read d1 :: Integer))
+data Question = Question { number     :: Operand,
+                           operations :: [(Operator, Operand)] } deriving Show
 
 answer :: String -> Maybe Integer
-answer problem = case parseResult of
-    Left _error        -> trace ("attoparsec error: " ++ _error) Nothing
-    Right (Problem d1) -> Just d1
-  where
-    parseResult = parseOnly expressionParser $ pack problem
+answer text = parseQuestion text >>= return . result
+
+parseQuestion :: String -> Maybe Question
+parseQuestion text = rightToMaybe $ parseOnly questionParser (fromString text)
+
+questionParser :: Parser Question
+questionParser = do
+  string "What is "
+  number <- operandParser
+  operations <- many operationParser
+  string "?"
+  return $ Question number operations
+
+operatorParser :: Parser Operator
+operatorParser =
+      (string " plus " >> return Addition)
+  <|> (string " minus " >> return Substraction)
+  <|> (string " multiplied by " >> return Multiplication)
+  <|> (string " divided by " >> return Division)
+
+operandParser :: Parser Operand
+operandParser = signed decimal
+
+operationParser :: Parser (Operator, Operand)
+operationParser = do
+  operator' <- operatorParser
+  operand' <- operandParser
+  return (operator', operand')
+
+result :: Question -> Integer
+result question = foldl runOperation (WordProblem.number question) (operations question)
+  where runOperation n (operator, operand) = case operator of
+                                               Addition -> n + operand
+                                               Substraction -> n - operand
+                                               Multiplication -> n * operand
+                                               Division -> n `div` operand

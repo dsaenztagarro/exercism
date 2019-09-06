@@ -11,6 +11,7 @@ library:
   dependencies:
   - text
   - attoparsec
+  - either
 
 tests:
   test:

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 65b3ad8b9219e729a3d5f5283d48ebc7579f0c111a728c15801013a13e9da03a
+-- hash: dcf94aea4eaa41defb5b64f95a008fd442032b817e6bb1990c787bf0c9721680
 
 name:           wordy
 version:        1.5.0.8
@@ -21,6 +21,7 @@ library
   build-depends:
       attoparsec
     , base
+    , either
     , text
   default-language: Haskell2010
 
