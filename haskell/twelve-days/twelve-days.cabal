@@ -1,0 +1,36 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 4c82a26ff1dd1efe91de1aeeabe3228562aa46ecca46624f70c66b9c4f382b32
+
+name:           twelve-days
+version:        1.2.0.4
+build-type:     Simple
+
+library
+  exposed-modules:
+      TwelveDays
+  other-modules:
+      Paths_twelve_days
+  hs-source-dirs:
+      src
+  ghc-options: -Wall
+  build-depends:
+      base
+  default-language: Haskell2010
+
+test-suite test
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      Paths_twelve_days
+  hs-source-dirs:
+      test
+  build-depends:
+      base
+    , hspec
+    , twelve-days
+  default-language: Haskell2010
